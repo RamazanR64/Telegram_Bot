@@ -1,5 +1,8 @@
 from telegram.ext import ApplicationBuilder, MessageHandler, filters, CallbackQueryHandler, CommandHandler
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 from gpt import *
 from util import *
 
@@ -138,6 +141,7 @@ async def opener(update, context):
     dialog.count = 0
     await send_text(update, context, "Имя девушки?")
 
+
 async def opener_dialog(update, context):
     text = update.message.text
     dialog.count += 1
@@ -203,9 +207,9 @@ dialog.count = 0
 dialog.user = {}
 
 
-chatgpt = ChatGptService(token="gpt:EG44JHCgWRZcE28XEIsgJFkblB3TKFPdeHKs9DxUsueSBurd")
+chatgpt = ChatGptService(token="CHATGPT_TOKEN")
 
-app = ApplicationBuilder().token("7486988613:AAFEtyMCJN5tnQgMjnr3D8DJIJGyaarzGlw").build()
+app = ApplicationBuilder().token("TELEGRAM_TOKEN").build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("gpt", gpt))
 app.add_handler(CommandHandler("date", date))
